@@ -4,7 +4,7 @@ A calculus-based approach to nonlinear regression.
 
 ## Introduction
 
-Back in June of 2024, I set out to begin learning more about machine learning. In particular, I was inspired by the curve-fitting problem: given an arbitary set of points on a plane, can we generalize a function to adequately approximate the outputs and interpolate the values between them?
+Back in June of 2024, I set out to begin learning more about machine learning. In particular, I was inspired by the curve-fitting problem: given an arbitrary set of points on a plane, can we generalize a function to adequately approximate the outputs and interpolate the values between them?
 
 Before formally diving into my study of the field of statistical learning methods, I decided to have a go at this problem myself. I devised an algorithm derived from Taylor's Theorem using Gauss-Jordan elimination, and a demonstration is implemented in Python with pandas and numpy matrix solver.
 
@@ -17,7 +17,7 @@ Let us introduce Taylor's Theorem. We'll spare the rigor and simply work with an
 
 $\displaystyle f(x) \doteq P(x, n) = \sum_{k=0}^na_k x^k$, where $x \in \mathbb{R}$ belongs to the function's domain, $n \in \mathbb{N}_0$ is the desired degree of the approximating polynomial, and $a$ is some sequence of real numbers.
 
-What this means is that any continuous real-valued function (more precisely, *smooth analytic function*) can be approximated by an arbitary polynomial. Note that Taylor's Theorem proves that $P$ converges exactly to $f$ as $n \to \infty$ within a certain *interval of convergence*; while this extends beyond the scope of this derivation, it is nonetheless a fact that will be of importance later.
+What this means is that any continuous real-valued function (more precisely, *smooth analytic function*) can be approximated by an arbitrary polynomial. Note that Taylor's Theorem proves that $P$ converges exactly to $f$ as $n \to \infty$ within a certain *interval of convergence*; while this extends beyond the scope of this derivation, it is nonetheless a fact that will be of importance later.
 
 In other words, for all $ (x,\, f(x))$ is a given set of points,  $\exists \,n \in \mathbb{N}_0$ such that $f(x) = P(x,n) \pm \varepsilon$, for some acceptable error $\varepsilon$. From here, we must determine an algorithm to compute the coefficients $a_k$ of polynomial $P$.
 
@@ -47,7 +47,7 @@ Furthermore, we run into problems beyond the calculus portion of this algorithm.
 
 ## Reflection
 
-All in all, we end up with a satisfactory algorithm that can fit a function to an arbitary set of points. Is this the most efficient solution? No. Far from it, in fact. But given that there are entire fields of study related to this very problem, and the fact that I hacked together this algorithm and implementation in the span of a couple hours, this is a fairly satisfying result.
+All in all, we end up with a satisfactory algorithm that can fit a function to an arbitrary set of points. Is this the most efficient solution? No. Far from it, in fact. But given that there are entire fields of study related to this very problem, and the fact that I hacked together this algorithm and implementation in the span of a couple hours, this is a fairly satisfying result.
 
 Overall, I am glad that I decided to embark on this experiment. This endeavor has expanded my intuition regarding statistical learning and data science more broadly. There are certainly some ways which I could improve this method, such as accounting for an error tolerance, and determining the lowest possible degree of polynomial that does not trade off much accuracy. Realistically, however, my time would be better spent stuyding legitimate data science techniques that supersede the limitations of this rudimentary curve-fitting model.
 
