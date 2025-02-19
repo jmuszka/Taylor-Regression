@@ -5,6 +5,7 @@ import sys
 import os
 import pygame
 import math
+from random import randint
 
 FPS = 60
 TITLE = "Curve Fitter"
@@ -22,24 +23,30 @@ def main():
     screen = pygame.display.set_mode(SIZE)
     # font_file = os.path.join(root_dir, FONT_FILENAME)
     # font = pygame.font.Font(font_file, FONT_SIZE)
+    font = pygame.font.Font(pygame.font.get_default_font(), 16)
+ 
+    # create a text surface object,
+    # on which text is drawn on it.
+    text = font.render('Press \'q\' to quit, \'p\' to generate new points', True, (0,0,0))
+    
+    # create a rectangular object for the
+    # text surface object
+    textRect = text.get_rect()
+    
+    # set the center of the rectangular object.
+    textRect.center = (170, 25)
 
     # Splash Screen
     screen.fill(BG_COLOR)
     pygame.display.update()
 
-    points = [
-            (0, 1),
-            (1, 0.36788),
-            (2, 0.018316),
-            (3, 0.00012341),
-            (4, 0),
-            (-1, 0.36788),
-            (-2, 0.018316),
-            (-3, 0.00012341),
-            (-4, 0),
-            (2.5, 0.0019305)
-
-    ]
+    points = []
+    # Generate between 2 and 8 random points on the graph
+    for i in range(randint(2, 7)):
+        points.append((
+            randint(-GRID*100, GRID*100)/200,
+            randint(-GRID*100, GRID*100)/200
+        ))
 
     f = get_polynomial(points)
 
@@ -49,22 +56,16 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            #Keyboard controls
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    sys.exit() # quit
+                if event.key == pygame.K_p:
+                    os.execl(sys.executable, sys.executable, *sys.argv)
+            
 
-            # Screen resizing
-            # if event.type == pygame.VIDEORESIZE: # event attr: size, w, h
-            #     screen = pygame.display.set_mode(event.size, pygame.RESIZABLE)
-
-            # if event.type == pygame.KEYDOWN:  # event attr: key, mod, unicode, scancode
-            #     if event.key == pygame.K_DOWN:
-            #         pass
-            # if event.type == pygame.MOUSEMOTION:  # event attr: pos, rel, buttons, touch
-            #     pass
-            # if event.type == pygame.MOUSEBUTTONDOWN:  # event attr: pos, button, touch
-            #     pass
-
-        # Drawing a frame
-        # ==== Do Something here ====
-        # Draw from back to front; draw background first
+        # Draw caption
+        screen.blit(text, textRect)
 
         # Draw axes
         pygame.draw.line(screen, (200,0,0), (WIDTH/2,0), (WIDTH/2,HEIGHT), 3)
